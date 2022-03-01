@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.vue.model.mapper.CommentMapper">
+	<select id="list" resultType="commentDto">
+		select comment_no, user_name, comment, comment_time, articleno, user_id
+		from comments where articleno = #{articleno} order by comment_time desc
+	</select>
+
+	<insert id="create">
+		insert into comments(user_name, comment, comment_time, articleno, user_id) 
+		values (#{user_name}, #{comment}, now(), #{articleno}, #{user_id})
+	</insert>
+	
+	<update id="modify">
+		update comments set comment = #{comment} 
+		where comment_no = #{comment_no}
+	</update>
+
+	<delete id="delete">
+		delete from comments 
+		where comment_no = #{comment_no}
+	</delete>
+</mapper>
+
